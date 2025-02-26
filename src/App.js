@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import "../node_modules/bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
 import {
-  BrowserRouter as Router,
+  
   Routes,
   Route,
   Navigate,
@@ -26,7 +26,7 @@ function App() {
     });
   });
   return (
-    <Router>
+    <>
       <Header />
       <div className="min-h-screen flex flex-col justify-between">
         <div className="flex-grow">
@@ -40,7 +40,7 @@ function App() {
         </div>
       </div>
       <ToastContainer />
-    </Router>
+    </>
   );
 }
 
