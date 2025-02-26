@@ -2,6 +2,7 @@ import { GoogleAuthProvider, signInWithPopup } from "firebase/auth";
 import { auth, db } from "./firebase";
 import { toast } from "react-toastify";
 import { setDoc, doc } from "firebase/firestore";
+import GoogleImg from '../google.png';
 
 function SignInwithGoogle() {
   function googleLogin() {
@@ -30,7 +31,7 @@ function SignInwithGoogle() {
         style={{ display: "flex", justifyContent: "center", cursor: "pointer" }}
         onClick={googleLogin}
       >
-        <img src={require("../google.png")} width={"60%"} alt="ProfilePicture" />
+        <img src={GoogleImg} width={"60%"} alt="ProfilePicture" />
       </div>
     </div>
   );
