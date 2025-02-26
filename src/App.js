@@ -10,7 +10,8 @@ import {
 
 import Login from "./components/login";
 import SignUp from "./components/register";
-
+import Header from './components/header';
+import Footer from './components/footer';
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Profile from "./components/profile";
@@ -26,22 +27,19 @@ function App() {
   });
   return (
     <Router>
-      <div className="App">
-        <div className="auth-wrapper">
-          <div className="auth-inner">
-            <Routes>
-              <Route
-                path="/"
-                element={user ? <Navigate to="/profile" /> : <Login />}
-              />
-              <Route path="/login" element={<Login />} />
-              <Route path="/register" element={<SignUp />} />
-              <Route path="/profile" element={<Profile />} />
-            </Routes>
-            <ToastContainer />
-          </div>
+      <Header />
+      <div className="min-h-screen flex flex-col justify-between">
+        <div className="flex-grow">
+          <Routes>
+            <Route path="/" element={user ? <Navigate to="/profile" /> : <Login />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/register" element={<SignUp />} />
+            <Route path="/profile" element={<Profile />} />
+          </Routes>
+        <Footer />
         </div>
       </div>
+      <ToastContainer />
     </Router>
   );
 }
