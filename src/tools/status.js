@@ -17,29 +17,35 @@ const Status = () => {
   const [isAdmin, setIsAdmin] = useState(false);
   const [emailToUpdate, setEmailToUpdate] = useState("");
 
+  // Fetch user authentication state
   useEffect(() => {
-    const fetchUserData = () => {
-      auth.onAuthStateChanged(async (loggedUser) => {
-        if (loggedUser) {
-          setUser(loggedUser);
-          setIsAdmin(loggedUser.email === "enershas@gmail.com"); // Check admin role
+    const unsubscribeAuth = auth.onAuthStateChanged(async (loggedUser) => {
+      if (loggedUser) {
+        setUser(loggedUser);
+        setIsAdmin(loggedUser.email === "enershas@gmail.com"); // Check admin role
+      } else {
+        setUser(null);
+        setIsAdmin(false);
+      }
+    });
 
-          const userDocRef = doc(db, "Orders", loggedUser.email);
-          console.log(user);
-          // Real-time listener for user status
-          const unsubscribe = onSnapshot(userDocRef, (docSnap) => {
-            if (docSnap.exists()) {
-              setCurrentStep(docSnap.data().status);
-            }
-          });
-
-          return () => unsubscribe(); // Cleanup on unmount
-        }
-      });
-    };
-
-    fetchUserData();
+    return () => unsubscribeAuth();
   }, []);
+
+  // Fetch user status if authenticated
+  useEffect(() => {
+    if (!user) return;
+
+    const userDocRef = doc(db, "Orders", user.email);
+
+    const unsubscribe = onSnapshot(userDocRef, (docSnap) => {
+      if (docSnap.exists()) {
+        setCurrentStep(docSnap.data().status);
+      }
+    });
+
+    return () => unsubscribe();
+  }, [user]); // Dependency added
 
   // Admin updates status for a specific user
   const updateStatusForUser = async () => {

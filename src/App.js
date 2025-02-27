@@ -2,12 +2,10 @@ import React, { useEffect } from "react";
 import "../node_modules/bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
 import {
-  
   Routes,
   Route,
   Navigate,
 } from "react-router-dom";
-
 import Login from "./components/login";
 import SignUp from "./components/register";
 import Header from './components/header';
@@ -35,7 +33,7 @@ function App() {
     }
   };
 
-  // Disable right-click
+  
   const disableRightClick = (e) => e.preventDefault();
 
   document.addEventListener("keydown", handleDevTools);
