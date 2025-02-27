@@ -25,6 +25,22 @@ function App() {
       setUser(user);
     });
   });
+
+  const handleDevTools = (e) => {
+    if (
+      (e.ctrlKey && e.shiftKey && (e.key === "I" || e.key === "J" || e.key === "C")) || 
+      (e.ctrlKey && e.key === "U")
+    ) {
+      e.preventDefault();
+    }
+  };
+
+  // Disable right-click
+  const disableRightClick = (e) => e.preventDefault();
+
+  document.addEventListener("keydown", handleDevTools);
+  document.addEventListener("contextmenu", disableRightClick);
+
   return (
     <>
       <Header />

@@ -25,7 +25,7 @@ const Status = () => {
           setIsAdmin(loggedUser.email === "enershas@gmail.com"); // Check admin role
 
           const userDocRef = doc(db, "Orders", loggedUser.email);
-
+          console.log(user);
           // Real-time listener for user status
           const unsubscribe = onSnapshot(userDocRef, (docSnap) => {
             if (docSnap.exists()) {
